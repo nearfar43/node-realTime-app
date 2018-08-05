@@ -1,12 +1,30 @@
 const path = require('path');
+const http = require('http');
 const express = require('express');
+const socketIO = require('socket.io');
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 
 var app = express();
+//set socket.io in server
+var server = http.createServer(app);
+var io = socketIO(server);
+
 app.use(express.static(publicPath));
 
-app.listen(port, () => {
+//register a connection event listener 
+io.on('connection', (socket) => {
+	console.log('New user connected');
+
+	socket.on('disconnect', () => {
+		console.log('User was disconnected');
+	});
+});
+
+
+server.listen(port, () => {
 	console.log(`Server is up on Port ${port}`);
 });
+
+//https://peaceful-ocean-78703.herokuapp.com
