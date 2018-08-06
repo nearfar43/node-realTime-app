@@ -1,20 +1,43 @@
 <!DOCTYPE html>
-
 <html>
+
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
+
 <body>
-	
-	<p>Welcome to the chat app</p>
-
-	<!-- load socket.io js --->
-	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-
-	<!-- open the socket.io connection -->
-	<script type="text/javascript" src="/js/index.js">
-
-	</script>
+    <div class="container">
+        <div>
+            <h3 class="text-center font-italic">Welcome to the chat app</h3>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="text-center">
+        	<ul class="list-group list-group" id="messageList">     		
+        	</ul>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="container">
+            <form id="message-form" class="form-inline justify-content-center">
+                <div class="form-group">
+                    <label class="mr-sm-2" for="message">Message:</label>
+                    <div class="input-group-addon mb-2 mr-sm-2 mb-sm-0">@</div>
+                    <input type="text" name="message" placeholder="type something..." class="form-control mb-2 mr-sm-2 mb-sm-0" id="message">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- load socket.io js --->
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/libs/jquery-3.3.1.min.js"></script>
+    <!-- open the socket.io connection -->
+    <script type="text/javascript" src="/js/index.js">
+    </script>
 </body>
 
 </html>
