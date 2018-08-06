@@ -46,6 +46,8 @@ $('#message-form').on('submit', function(e) {
 	}, function() {
 
 	});
+
+	$('#message-form').trigger("reset");
 });
 
 //handle send location button event
