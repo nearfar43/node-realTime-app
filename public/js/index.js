@@ -21,12 +21,12 @@ socket.on('newMessage', function(message) {
 	$('#messageList').append(li);
 });
 
-socket.emit('createMessage', {
-	from: 'Jeff',
-	text: 'Hey'
-}, function (data) {
-	console.log('Received:', data);
-});
+// socket.emit('createMessage', {
+// 	from: 'Jeff',
+// 	text: 'Hey'
+// }, function (data) {
+// 	console.log('Received:', data);
+// });
 
 $('#message-form').on('submit', function(e) {
 	e.preventDefault();
