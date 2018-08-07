@@ -3,57 +3,61 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet href="/css/styles.css ">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css " integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm " crossorigin="anonymous">   
+    <link rel="stylesheet" href="/css/styles.css"> 
 </head>
 
 <body class="chat">
-    <div class="container-fluid">
-    	<div class="row justify-content-md-center align-items-start">
-    		<div class="col col-md-4 sticky-top" id="chat_sidebar">
-    			<h3 class="font-italic">People List</h3>
-    			<div id="users " class=" ">
-    				
-    			</div>
-    		</div>
-		    <div class="col-md-8" id="chat_main">
+	<div class="chat__sidebar">
+		<h3>People</h3>
+		<div id="users"></div>
+		
+	</div>
 
-		         <div class="col-md-6 sticky-top">
-		         	<h3 class="text-center font-italic ">Chat room</h3>		            
-		        </div>
+	<div class="chat__main">
+		<ol id="messages" class="chat__messages"></ol>
 
-		        <div class="col-md-6 w-50 h-75">
-		        	<ul class="list-group" id="messageList"></ul>
-		        </div>
-			
-		        <div class="fixed-bottom" id="chat_footer">
-			        <form id="message-form" class="form-inline">
-			            <div class="form-group">
-			                <label class="mr-sm-2" for="message">Message:</label>
-			                 <div class="input-group mr-2">
-			                    <div class="input-group-prepend">
-			                        <div class="input-group-text  id="btnGroupAddon">@</div>
-			                    </div>
-			                    <input type="text" name="message " placeholder="type something... " class="form-control mb-2 mr-sm-2 mb-sm-0 " id="message" autofocus autocomplete="off" />
-			                    <div class="btn-group mr-2" role="group">
-			                    	<button type="submit" class="btn btn-primary">Send</button>
-			                    	<button type="button" class="btn btn-secondary ml-2" id="send-location">Send location</button>				                	
-				            	</div>
-				            		
-			                </div>
-			            </div>			     	
-			        </form>
-		        </div>
-
-	    	</div> 
-	    </div>	    
-    </div>    
+		<div class="chat__footer">
+			<form id="message-form">
+				<input type="text" name="message" id="message" placeholder="Message" autofocus autocomplete="off">
+				<button>Send</button>
+			</form>
+			<button id="send-location">Send location</button>
+		</div>
+	</div>
+		
+		<!-- messages template -->
+	    <script type="text/template" id="message-template">
+    		<li class="message">
+				<div class="message__title">
+					<h4>{{from}}</h4>
+					<span>{{createdAt}}</span>
+				</div>
+				<div class="message__body">
+					<p>{{text}}</p>
+				</div>	
+    		</li>
+    	</script>
+		<!-- location message template -->
+	    <script type="text/template" id="location-message-template">
+    		<li class="message">
+				<div class="message__title">
+					<h4>{{from}}</h4>
+					<span>{{createdAt}}</span>
+				</div>
+				<div class="message__body">
+					<p>
+						<a href="{{url}}" target="_blank">My current location</a>
+					</p>
+				</div>	
+    		</li>
+    	</script>    	
         <!-- load socket.io js --->
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="/js/libs/jquery-3.3.1.min.js"></script>
-        <!-- open the socket.io connection -->
-        <script type="text/javascript" src="/js/index.js"></script>
+        <!-- open the socket.io connection -->    
         <script type="text/javascript" src="/js/libs/moment.js"></script>
+        <script type="text/javascript" src="/js/libs/mustache.js"></script>
+        <script type="text/javascript" src="/js/index.js"></script>
 
 </body>
 

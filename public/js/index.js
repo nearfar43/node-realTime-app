@@ -16,21 +16,38 @@ socket.on('disconnect', function() {
 socket.on('newMessage', function(message) {
 	//console.log('New Message', message);
 	var formattedTime = moment(message.createdAt).format('h:mm a');
+	var template = $('#message-template').html();
+	var html = Mustache.render(template, {
+		from: message.from,
+		text: message.text,
+		createdAt: formattedTime
+	});
 
-	var li = $('<li class="list-group-item bg-dark text-white" id="listItem"></li>');
-	li.text(`${message.from}: ${message.text} (${formattedTime})`);
-	//$('#listItem').attr('class', 'list-group-item list-group-item-action disabled');
-	$('#messageList').append(li);
+	$('#messages').append(html);
+
+	// var li = $('<li class="list-group-item bg-dark text-white" id="listItem"></li>');
+	// li.text(`${message.from}: ${message.text} (${formattedTime})`);
+	// //$('#listItem').attr('class', 'list-group-item list-group-item-action disabled');
+	// $('#messages').append(li);
 });
 
 socket.on('newLocationMessage', function(message) {
 	var formattedTime = moment(message.createdAt).format('h:mm a');
-	var li = $('<li class="list-group-item bg-dark text-white"></li');
-	var a = $(`<a target="_blank">My current location (${formattedTime})</a>`);
-	li.text(`${message.from}: `);
-	a.attr('href', message.url);
-	li.append(a);
-	$('#messageList').append(li);
+	// var li = $('<li class="list-group-item bg-dark text-white"></li');
+	// var a = $(`<a target="_blank">My current location (${formattedTime})</a>`);
+	// li.text(`${message.from}: `);
+	// a.attr('href', message.url);
+	// li.append(a);
+	// $('#messages').append(li);
+	// 
+	var template = $('#location-message-template').html();
+	var html = Mustache.render(template, {
+		from: message.from,
+		url: message.url,
+		createdAt: formattedTime
+	});
+
+	$('#messages').append(html);
 });
 
 // socket.emit('createMessage', {
@@ -43,7 +60,7 @@ socket.on('newLocationMessage', function(message) {
 $('#message-form').on('submit', function(e) {
 	e.preventDefault();
 
-	messageTextBox = $('[id=message]').val();
+	var messageTextBox = $('#message').val();
 
 	socket.emit('createMessage', {
 		from: 'User',
