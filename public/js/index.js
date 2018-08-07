@@ -14,16 +14,19 @@ socket.on('disconnect', function() {
 });
 
 socket.on('newMessage', function(message) {
-	console.log('New Message', message);
+	//console.log('New Message', message);
+	var formattedTime = moment(message.createdAt).format('h:mm a');
+
 	var li = $('<li class="list-group-item bg-dark text-white" id="listItem"></li>');
-	li.text(`${message.from}: ${message.text}`);
+	li.text(`${message.from}: ${message.text} (${formattedTime})`);
 	//$('#listItem').attr('class', 'list-group-item list-group-item-action disabled');
 	$('#messageList').append(li);
 });
 
 socket.on('newLocationMessage', function(message) {
+	var formattedTime = moment(message.createdAt).format('h:mm a');
 	var li = $('<li class="list-group-item bg-dark text-white"></li');
-	var a = $('<a target="_blank">My current location</a>');
+	var a = $(`<a target="_blank">My current location (${formattedTime})</a>`);
 	li.text(`${message.from}: `);
 	a.attr('href', message.url);
 	li.append(a);
