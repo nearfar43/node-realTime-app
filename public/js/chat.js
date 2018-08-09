@@ -102,10 +102,9 @@ $('#message-form').on('submit', function(e) {
 	var messageTextBox = $('#message').val();
 
 	socket.emit('createMessage', {
-		from: 'User',
 		text: messageTextBox
 	}, function() {
-		messageTextBox.val('');
+		$('#message').val('');
 	});
 
 	$('#message-form').trigger("reset");
