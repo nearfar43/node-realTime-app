@@ -81,7 +81,7 @@ io.on('connection', (socket) => {
 
 		if (user) {
 			io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-			io.to().emit('newMessage', generateMessage('Admin', `${user.name} has left the room.`));
+			io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left the room!`));
 		}
 	});
 
